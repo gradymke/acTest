@@ -30,7 +30,7 @@ A simple Flask application demonstrating AWS AppConfig feature flags.
 
 1. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   uv pip install -r requirements.txt
    ```
 
 2. Set environment variables (or rely on default credentials):
@@ -43,10 +43,10 @@ A simple Flask application demonstrating AWS AppConfig feature flags.
 
 3. Run the app:
    ```bash
-   python app.py
+   uv run app.py
    ```
 
-4. Open http://localhost:5000 in your browser
+4. Open http://localhost:8000 in your browser
 
 ## Changing Feature Flags
 

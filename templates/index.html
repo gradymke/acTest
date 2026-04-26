@@ -1,62 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS AppConfig Demo</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .feature {
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-        .feature-feature1 {
-            background: #d4edda;
-            border: 2px solid #28a745;
-        }
-        .feature-feature2 {
-            background: #d1ecf1;
-            border: 2px solid #17a2b8;
-        }
-        .feature h2 {
-            margin-top: 0;
-        }
-        .disabled {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <h1>AWS AppConfig Demo</h1>
-    
-    <form method="get" action="/">
-        <label for="env">Environment:</label>
-        <select name="env" id="env" onchange="this.form.submit()">
-            <option value="dev" {% if env == 'dev' %}selected{% endif %}>dev</option>
-            <option value="test" {% if env == 'test' %}selected{% endif %}>test</option>
-            <option value="prod" {% if env == 'prod' %}selected{% endif %}>prod</option>
-        </select>
-    </form>
-    
-    <div class="feature feature-feature1 {% if feature1 != 'true' %}disabled{% endif %}">
-        <h2>Feature 1</h2>
-        <p>This section is visible when feature1 is "true".</p>
-    </div>
-    
-    <div class="feature feature-feature2 {% if feature2 != 'true' %}disabled{% endif %}">
-        <h2>Feature 2</h2>
-        <p>This section is visible when feature2 is "true".</p>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AWS AppConfig Demo</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+        />
+        <style>
+            .feature {
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 8px;
+            }
+            .feature-feature1 {
+                background: #d4edda;
+                border: 2px solid #28a745;
+            }
+            .feature-feature2 {
+                background: #d1ecf1;
+                border: 2px solid #17a2b8;
+            }
+            .feature h2 {
+                margin-top: 0;
+            }
+            .disabled {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>AWS AppConfig Demo</h1>
+
+        <form method="get" action="/">
+            <label for="env">Environment:</label>
+            <select name="env" id="env" onchange="this.form.submit()">
+                <option value="dev" {% if env == 'dev' %}selected{% endif %}>dev</option>
+                <option value="test" {% if env == 'test' %}selected{% endif %}>test</option>
+                <option value="prod" {% if env == 'prod' %}selected{% endif %}>prod</option>
+            </select>
+        </form>
+
+        <div
+            class="feature feature-feature1 {% if feature1 != 'true' %}disabled{% endif %}"
+        >
+            <h2>Feature 1</h2>
+            <p>This section is visible when feature1 is "true".</p>
+        </div>
+
+        <div
+            class="feature feature-feature2 {% if feature2 != 'true' %}disabled{% endif %}"
+        >
+            <h2>Feature 2</h2>
+            <p>This section is visible when feature2 is "true".</p>
+        </div>
+    </body>
 </html>

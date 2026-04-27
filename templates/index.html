@@ -9,6 +9,39 @@
             href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
         />
         <style>
+            .top-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                align-items: start;
+            }
+            .env-selector select {
+                max-width: 200px;
+            }
+            .status-card {
+                border: 1px solid var(--pico-muted-border-color);
+                border-radius: var(--pico-border-radius);
+                padding: 1rem 1.25rem;
+            }
+            .status-card h3 {
+                margin-bottom: 0.5rem;
+            }
+            .status-card ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .status-card li {
+                padding: 0.25rem 0;
+            }
+            .badge-enabled {
+                color: #28a745;
+                font-weight: bold;
+            }
+            .badge-disabled {
+                color: #dc3545;
+                font-weight: bold;
+            }
             .feature {
                 padding: 20px;
                 margin: 20px 0;
@@ -28,35 +61,61 @@
             .disabled {
                 display: none;
             }
-            .body {
-                padding: 20px;
-            }
         </style>
     </head>
     <body>
-        <h1>AWS AppConfig Demo</h1>
+        <main class="container">
+            <h1>AWS AppConfig Demo</h1>
 
-        <form method="get" action="/">
-            <label for="env">Environment:</label>
-            <select name="env" id="env" onchange="this.form.submit()">
-                <option value="dev" {% if env == 'dev' %}selected{% endif %}>dev</option>
-                <option value="test" {% if env == 'test' %}selected{% endif %}>test</option>
-                <option value="prod" {% if env == 'prod' %}selected{% endif %}>prod</option>
-            </select>
-        </form>
+            <div class="top-section">
+                <div class="env-selector">
+                    <form method="get" action="/">
+                        <label for="env">Environment:</label>
+                        <select name="env" id="env" onchange="this.form.submit()">
+                            <option value="dev" {% if env == 'dev' %}selected{% endif %}>dev</option>
+                            <option value="test" {% if env == 'test' %}selected{% endif %}>test</option>
+                            <option value="prod" {% if env == 'prod' %}selected{% endif %}>prod</option>
+                        </select>
+                    </form>
+                </div>
 
-        <div
-            class="feature feature-feature1 {% if feature1 != 'true' %}disabled{% endif %}"
-        >
-            <h2>Feature 1</h2>
-            <p>This section is visible when feature1 is "true".</p>
-        </div>
+                <div class="status-card">
+                    <h3>Current Status</h3>
+                    <p><strong>Environment:</strong> {{ env }}</p>
+                    <ul>
+                        <li>
+                            Feature 1:
+                            {% if feature1 == 'true' %}
+                                <span class="badge-enabled">&#10003; Enabled</span>
+                            {% else %}
+                                <span class="badge-disabled">&#10007; Disabled</span>
+                            {% endif %}
+                        </li>
+                        <li>
+                            Feature 2:
+                            {% if feature2 == 'true' %}
+                                <span class="badge-enabled">&#10003; Enabled</span>
+                            {% else %}
+                                <span class="badge-disabled">&#10007; Disabled</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-        <div
-            class="feature feature-feature2 {% if feature2 != 'true' %}disabled{% endif %}"
-        >
-            <h2>Feature 2</h2>
-            <p>This section is visible when feature2 is "true".</p>
-        </div>
+            <div
+                class="feature feature-feature1 {% if feature1 != 'true' %}disabled{% endif %}"
+            >
+                <h2>Feature 1</h2>
+                <p>This section is visible when feature1 is "true".</p>
+            </div>
+
+            <div
+                class="feature feature-feature2 {% if feature2 != 'true' %}disabled{% endif %}"
+            >
+                <h2>Feature 2</h2>
+                <p>This section is visible when feature2 is "true".</p>
+            </div>
+        </main>
     </body>
 </html>

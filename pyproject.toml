@@ -1,7 +1,11 @@
 [project]
 name = "actest"
 version = "0.1.0"
-description = "Add your description here"
+description = "This is a test app for AWS AppConfig"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "boto3>=1.43.0",
+    "botocore[crt]>=1.26.0",
+    "flask>=3.1.3",
+]

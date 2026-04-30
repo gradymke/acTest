@@ -4,7 +4,7 @@ A simple Flask application demonstrating AWS AppConfig feature flags.
 
 ## Prerequisites
 
-- Python 3.8+
+- Python 3.11+
 - AWS credentials configured (via environment variables, ~/.aws/credentials, or IAM role)
 - IAM permissions to access AppConfig Data API
 
@@ -26,11 +26,17 @@ A simple Flask application demonstrating AWS AppConfig feature flags.
 }
 ```
 
+## Connect to AWS
+
+```bash
+aws login
+```
+
 ## Setup
 
 1. Install dependencies:
    ```bash
-   uv pip install -r requirements.txt
+   uv sync
    ```
 
 2. Set environment variables (or rely on default credentials):

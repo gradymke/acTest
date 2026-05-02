@@ -104,14 +104,14 @@
             </div>
 
             <div
-                class="feature feature-feature1 {% if feature1 != 'true' %}disabled{% endif %}"
+                class="feature feature-feature1 {% if not feature1 %}disabled{% endif %}"
             >
                 <h2>Feature 1</h2>
                 <p>This section is visible when feature1 is "true".</p>
             </div>
 
             <div
-                class="feature feature-feature2 {% if feature2 != 'true' %}disabled{% endif %}"
+                class="feature feature-feature2 {% if not feature2 %}disabled{% endif %}"
             >
                 <h2>Feature 2</h2>
                 <p>This section is visible when feature2 is "true".</p>

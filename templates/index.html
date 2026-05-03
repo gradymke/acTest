@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>AWS AppConfig Demo</title>
+        <title>Feature Flag Demo</title>
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
@@ -11,7 +11,7 @@
         <style>
             .top-section {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr;
                 gap: 2rem;
                 align-items: start;
             }
@@ -65,11 +65,23 @@
     </head>
     <body>
         <main class="container">
-            <h1>AWS AppConfig Demo</h1>
+            <h1>Feature Flag Demo</h1>
 
             <div class="top-section">
+                <div class="provider-selector">
+                    <form method="get" action="/">
+                        <input type="hidden" name="env" value="{{ env }}">
+                        <label for="provider">Provider:</label>
+                        <select name="provider" id="provider" onchange="this.form.submit()">
+                            <option value="appconfig" {% if provider == 'appconfig' %}selected{% endif %}>AppConfig</option>
+                            <option value="unleash" {% if provider == 'unleash' %}selected{% endif %}>Unleash</option>
+                        </select>
+                    </form>
+                </div>
+
                 <div class="env-selector">
                     <form method="get" action="/">
+                        <input type="hidden" name="provider" value="{{ provider }}">
                         <label for="env">Environment:</label>
                         <select name="env" id="env" onchange="this.form.submit()">
                             <option value="dev" {% if env == 'dev' %}selected{% endif %}>dev</option>
@@ -81,22 +93,23 @@
 
                 <div class="status-card">
                     <h3>Current Status</h3>
+                    <p><strong>Provider:</strong> {{ provider }}</p>
                     <p><strong>Environment:</strong> {{ env }}</p>
                     <ul>
                         <li>
                             Feature 1:
                             {% if feature1 %}
-                                <span class="badge-enabled">&#10003; Enabled</span>
+                                <span class="badge-enabled">✓ Enabled</span>
                             {% else %}
-                                <span class="badge-disabled">&#10007; Disabled</span>
+                                <span class="badge-disabled">✗ Disabled</span>
                             {% endif %}
                         </li>
                         <li>
                             Feature 2:
                             {% if feature2 %}
-                                <span class="badge-enabled">&#10003; Enabled</span>
+                                <span class="badge-enabled">✓ Enabled</span>
                             {% else %}
-                                <span class="badge-disabled">&#10007; Disabled</span>
+                                <span class="badge-disabled">✗ Disabled</span>
                             {% endif %}
                         </li>
                     </ul>

@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 
-from config_provider import AppConfigProvider, UnleashProvider
+from openfeature import api
+from openfeature.contrib.provider.unleash import UnleashProvider
+from aws_appconfig_provider import AwsAppConfigProvider
 
 app = Flask(__name__)
 
@@ -11,10 +13,26 @@ UNLEASH_API_KEYS = {
     "prod": "ultest:prod.0ee63ac6861ccd52ac35744cad90827166dadf136c321ad93139ed98",
 }
 
-def get_provider(provider_name):
+UNLEASH_URL = "https://us.app.getunleash.io/uspp0513/api/"
+UNLEASH_APP_NAME = "unleash-onboarding-python"
+
+
+def get_provider(provider_name, env):
     if provider_name == "unleash":
-        return UnleashProvider(api_keys=UNLEASH_API_KEYS)
-    return AppConfigProvider()
+        api_key = UNLEASH_API_KEYS.get(env)
+        if not api_key:
+            raise ValueError(f"No API key for environment: {env}")
+
+        provider = UnleashProvider(
+            url=UNLEASH_URL,
+            app_name=UNLEASH_APP_NAME,
+            api_token=api_key,
+        )
+        provider.initialize()
+    else:
+        provider = AwsAppConfigProvider(env=env)
+
+    return provider
 
 
 @app.route("/")
@@ -22,20 +40,23 @@ def index():
     provider_name = request.args.get("provider", "appconfig")
     env = request.args.get("env", "dev")
 
-    provider = get_provider(provider_name)
+    provider = get_provider(provider_name, env)
+    api.set_provider(provider)
+
+    client = api.get_client()
 
     feature1 = False
     feature2 = False
 
     try:
-        provider.get_config(env)
-        feature1 = provider.get_flag_value("feature1")
-        feature2 = provider.get_flag_value("feature2")
+        feature1 = client.get_boolean_value("feature1", False)
+        feature2 = client.get_boolean_value("feature2", False)
     except Exception as e:
         print(f"Error fetching config: {e}")
     finally:
-        if hasattr(provider, 'close'):
-            provider.close()
+        # Clean up Unleash provider if needed
+        if provider_name == "unleash" and hasattr(provider, "shutdown"):
+            provider.shutdown()
 
     return render_template(
         "index.html",

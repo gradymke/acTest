@@ -10,7 +10,8 @@ dependencies = [
     { name = "boto3" },
     { name = "botocore", extra = ["crt"] },
     { name = "flask" },
-    { name = "unleashclient" },
+    { name = "openfeature-provider-unleash" },
+    { name = "openfeature-sdk" },
 ]
 
 [package.metadata]
@@ -18,7 +19,8 @@ requires-dist = [
     { name = "boto3", specifier = ">=1.43.0" },
     { name = "botocore", extras = ["crt"], specifier = ">=1.26.0" },
     { name = "flask", specifier = ">=3.1.3" },
-    { name = "unleashclient", specifier = ">=6.7.0" },
+    { name = "openfeature-provider-unleash", specifier = ">=0.1.2" },
+    { name = "openfeature-sdk", specifier = ">=0.8.2" },
 ]
 
 [[package]]
@@ -490,6 +492,28 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/21/54/1d71cd143752361c0aebef16ad3f55926a6faf7b112d355745c1f8a25f7f/mmh3-5.2.1-cp314-cp314t-win32.whl", hash = "sha256:29bc3973676ae334412efdd367fcd11d036b7be3efc1ce2407ef8676dabfeb82", size = 41934, upload-time = "2026-03-05T15:55:53.564Z" },
     { url = "https://files.pythonhosted.org/packages/9d/e4/63a2a88f31d93dea03947cccc2a076946857e799ea4f7acdecbf43b324aa/mmh3-5.2.1-cp314-cp314t-win_amd64.whl", hash = "sha256:28cfab66577000b9505a0d068c731aee7ca85cd26d4d63881fab17857e0fe1fb", size = 43036, upload-time = "2026-03-05T15:55:55.252Z" },
     { url = "https://files.pythonhosted.org/packages/a0/0f/59204bf136d1201f8d7884cfbaf7498c5b4674e87a4c693f9bde63741ce1/mmh3-5.2.1-cp314-cp314t-win_arm64.whl", hash = "sha256:dfd51b4c56b673dfbc43d7d27ef857dd91124801e2806c69bb45585ce0fa019b", size = 40391, upload-time = "2026-03-05T15:55:56.697Z" },
+]
+
+[[package]]
+name = "openfeature-provider-unleash"
+version = "0.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "openfeature-sdk" },
+    { name = "unleashclient" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5b/85/a1aaf9e86934c397d58111c999ca91c958d7febd886850bad457b7a6421e/openfeature_provider_unleash-0.1.2.tar.gz", hash = "sha256:cb4698f7c0227fa222b4e4c7e030b8fbe7086c726ebe7aac5e3ffcdd2b746538", size = 9976, upload-time = "2026-03-16T13:07:45.614Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/01/87/813d6c9bd50c5e5c9022d8fa392009b9712ef3d8e5e171855cf530dd5919/openfeature_provider_unleash-0.1.2-py3-none-any.whl", hash = "sha256:5fc91ef907998e7518c6955b2d9a526c75d09cd14566dd12b5c79468bc061e55", size = 12608, upload-time = "2026-03-16T13:07:44.115Z" },
+]
+
+[[package]]
+name = "openfeature-sdk"
+version = "0.9.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/50/e1/866235e4333cc2065376ff95241297a405a8ff50a8b12662844ba624ffd6/openfeature_sdk-0.9.0.tar.gz", hash = "sha256:d65ca82c3f1abc5005b0b54bb4c729db04d7a70595f05dd373b47477b6b176bf", size = 32242, upload-time = "2026-04-21T18:09:50.306Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e8/4f/3f2e32a04505bfce0a02c541830cd862581076bb6422521d4ba9ff6840f8/openfeature_sdk-0.9.0-py3-none-any.whl", hash = "sha256:511fd66fe66807e95ea5a18074b559bc18657fe8294be0de4668201e297e98ad", size = 37804, upload-time = "2026-04-21T18:09:48.967Z" },
 ]
 
 [[package]]

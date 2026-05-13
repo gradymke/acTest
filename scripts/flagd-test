@@ -1,0 +1,5 @@
+flagd start -f file:./flagd/test.json \
+  --port 8023 \
+  --management-port 8024 \
+  --sync-port 8025 \
+  --ofrep-port 8026

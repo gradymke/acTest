@@ -1,0 +1,1 @@
+flagd start -f file:./flagd/dev.json

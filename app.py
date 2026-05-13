@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 
 from openfeature import api
 from openfeature.contrib.provider.unleash import UnleashProvider
+from openfeature.contrib.provider.flagd import FlagdProvider
 from aws_appconfig_provider import AwsAppConfigProvider
 
 app = Flask(__name__)
@@ -16,6 +17,8 @@ UNLEASH_API_KEYS = {
 UNLEASH_URL = "https://us.app.getunleash.io/uspp0513/api/"
 UNLEASH_APP_NAME = "unleash-onboarding-python"
 
+FLAGD_PORTS = {"dev": 8013, "test": 8023, "prod": 8033}
+
 
 def get_provider(provider_name, env):
     if provider_name == "unleash":
@@ -29,6 +32,9 @@ def get_provider(provider_name, env):
             api_token=api_key,
         )
         provider.initialize()
+    elif provider_name == "flagd":
+        port = FLAGD_PORTS.get(env, 8013)
+        provider = FlagdProvider(host="localhost", port=port)
     else:
         provider = AwsAppConfigProvider(env=env)
 
@@ -54,8 +60,7 @@ def index():
     except Exception as e:
         print(f"Error fetching config: {e}")
     finally:
-        # Clean up Unleash provider if needed
-        if provider_name == "unleash" and hasattr(provider, "shutdown"):
+        if hasattr(provider, "shutdown"):
             provider.shutdown()
 
     return render_template(

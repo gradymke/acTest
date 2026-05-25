@@ -11,3 +11,8 @@ dependencies = [
     "openfeature-sdk>=0.8.2",
     "openfeature-provider-unleash>=0.1.2",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]

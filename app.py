@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from openfeature import api
 from openfeature.contrib.provider.unleash import UnleashProvider
 from aws_appconfig_provider import AwsAppConfigProvider
+from query_override_provider import QueryParamOverrideProvider
 
 app = Flask(__name__)
 
@@ -41,7 +42,8 @@ def index():
     env = request.args.get("env", "dev")
 
     provider = get_provider(provider_name, env)
-    api.set_provider(provider)
+    wrapped_provider = QueryParamOverrideProvider(provider)
+    api.set_provider(wrapped_provider)
 
     client = api.get_client()
 

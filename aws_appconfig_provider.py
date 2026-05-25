@@ -8,6 +8,7 @@ from openfeature.flag_evaluation import FlagResolutionDetails
 from openfeature.hook import Hook
 from openfeature.provider import AbstractProvider
 from openfeature.provider.metadata import Metadata
+from openfeature.exception import ErrorCode
 
 
 class AwsAppConfigProvider(AbstractProvider):
@@ -99,7 +100,7 @@ class AwsAppConfigProvider(AbstractProvider):
             print(f"Error resolving flag {flag_key}: {e}")
             return FlagResolutionDetails(
                 value=default_value,
-                error_code="PROVIDER_ERROR",
+                error_code=ErrorCode.PROVIDER_FATAL,
                 error_message=str(e),
             )
 

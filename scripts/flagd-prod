@@ -1,0 +1,5 @@
+flagd start -f file:./flagd/prod.json \
+  --port 8033 \
+  --management-port 8034 \
+  --sync-port 8035 \
+  --ofrep-port 8036
